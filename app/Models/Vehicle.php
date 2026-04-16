@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Vehicle extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'plate_number',
+        'type',
+        'condition',
+        'availability',
+        'driver_id',
+        'current_kilometer',
+    ];
+
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(VehicleRequest::class);
+    }
+}
